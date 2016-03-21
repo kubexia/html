@@ -1,0 +1,35 @@
+{% macro tableOptions(table,item) %}
+    <ul class="table-options">
+        {% if table.hasCallback('route_edit') %}
+            {% set routeEdit = attribute(table, 'getCallback',['route_edit', item]) %}
+            {% if routeEdit %}
+                <li><a href="{{ routeEdit }}" data-toggle="tooltip" title="{{ trans('tables.row.options.edit.title') }}"><i class="fa fa-edit"></i></a></li>
+            {% endif %}
+        {% endif %}
+        {% if table.hasRoute('destroy') %}
+            {% set routeDestroy = (table.hasRoute('destroy','url') ? table.getRoute('destroy','url',[item]) : '') %}
+            {% if routeDestroy %}
+            <li>
+                <a href="#" class="element-remove" 
+                    data-toggle="tooltip" title="Delete"
+                    data-message="{{ table.hasRoute('destroy','message') ? table.getRoute('destroy','message', [item]) : trans('tables.row.options.delete.confirm') }}"  
+                    data-destroy-url="{{ routeDestroy }}" 
+                    data-return-url="{{ table.hasRoute('destroy','returnTo') ? table.getRoute('destroy','returnTo',[item]) : '' }}">
+                        <i class="fa fa-times"></i>
+                </a>
+            </li>
+            {% endif %}
+        {% endif %}
+    </ul>
+{% endmacro %}
+
+{% macro imagePreview(table,col,item) %}
+    {% if table.hasCallback(col.attr.image.route) %}
+        {% set imagePreviewUrl = table.getCallback(col.attr.image.route,item) %}
+        {% if imagePreviewUrl %}
+            <a href="{{ imagePreviewUrl }}" class="image-preview" data-image-preview-width="250" target="_blank"><img width="{{ col.attr.image.width }}" src="{{ imagePreviewUrl }}"></a>
+        {% else %}
+            <i class="text-muted"><small>{{ trans('tables.fields.not_defined') }}</small></i>
+        {% endif %}
+    {% endif %}
+{% endmacro %}

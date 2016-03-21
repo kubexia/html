@@ -1,0 +1,36 @@
+{% import 'components/macros/form_elements.twig' as c %}
+{% set formId = (form.hasOption('id') ? 'id="'~form.getOption('id')~'"' : '') %}
+<form {{ formId|raw }} action="{{ form.getAction() }}" method="POST" class="form-inline kform" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="{{ form.getMethod() }}">
+    <div class="notification-holder"></div>
+    
+    {% for el in form.getElements() %}
+        {% if el.element.type == 'view' %}
+            {{ el.element.template|raw }}
+        {% elseif el.element.type == 'break' %}
+            <hr class="form-break">
+        {% else %}
+            <div class="form-group">
+                <label class="control-label">
+                    {{ el.element.label }}{% if el.element.required %}<span class="text-danger">*</span>{% endif %}
+                </label>
+                {{ attribute(c, el.element.type, {'el': el.element,'attr': el.attributes, 'form': form}) }}
+                <div class="kform-custom-message {{ el.element.name }}"></div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary submit-btn" data-loading-text="{{ form.getMethod() == 'POST' ? trans('forms.status.creating') : trans('forms.status.updating') }}">
+            <i class="fa fa-save"></i> {{ trans('forms.buttons.save') }}
+        </button>
+        {% if form.hasRoute('destroy') %}
+            {% set item = (form.hasRoute('destroy','item') ? form.getRoute('destroy','item') : []) %}
+            <button type="button" class="btn btn-danger element-remove" 
+                data-message="{{ form.hasRoute('destroy','message') ? form.getRoute('destroy','message',[item]) : trans('forms.buttons.delete.confirm') }}"  
+                data-destroy-url="{{ form.hasRoute('destroy','url') ? form.getRoute('destroy','url',[item]) : '' }}" 
+                data-return-url="{{ form.hasRoute('destroy','returnTo') ? form.getRoute('destroy','returnTo',[item]) : '' }}">
+                    <i class="fa fa-times"></i> {{ trans('forms.buttons.delete.title') }}
+            </button>
+        {% endif %}
+    </div>
+</form>

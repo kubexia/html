@@ -1,0 +1,55 @@
+{% import 'components/macros/table_elements.twig' as t %}
+{% set columns = table.getColumns() %}
+{% set results = table.getResults() %}
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                {% if table.hasOption('showRowNumber') %}
+                <th>{{ trans('tables.columns.no') }}</th>
+                {% endif %}
+                {% for col in columns %}
+                    <th>{{ col.name }}</th>
+                {% endfor %}
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in results %}
+            <tr>
+                {% if table.hasOption('showRowNumber') %}
+                <td>{{ loop.index + (results.perPage * results.currentPage) - results.perPage}}.</td>
+                {% endif %}
+                {% for field,col in columns %}
+                    <td>
+                        {% set value = (col.attr.callback ? attribute(table, 'getCallback',[col.attr.callback, item])  : item[field]) %}
+                        {% if col.attr.route %}
+                            {% if value %}
+                                <a href="{{ attribute(table, 'getCallback',[col.attr.route, item]) }}">{{ value|raw }}</a>
+                            {% else %}
+                                <i class="text-muted"><small>{{ trans('tables.fields.not_defined') }}</small></i>
+                            {% endif %}
+                        {% elseif col.attr.image %}
+                            {{ t.imagePreview(table,col,item) }}
+                        {% else %}
+                            {% if value %}
+                                {{ value|raw }}
+                            {% else %}
+                                <i class="text-muted"><small>{{ trans('tables.fields.not_defined') }}</small></i>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td>
+                    {{ t.tableOptions(table,item) }}
+                </td>
+            </tr>
+            {% else %}
+                <tr>
+                    <td colspan="100%">{{ trans('tables.results.no_items') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ results.render()|raw }}
+</div>

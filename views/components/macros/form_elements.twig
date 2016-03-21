@@ -1,0 +1,163 @@
+{% macro text(el,attr,form) %}
+    <input type="text" name="{{ el.name }}" value="{{ attr.value }}" placeholder="{{ attr.placeholder }}" autocomplete="off" class="form-control">
+{% endmacro %}
+
+{% macro textGroup(el,attr,form) %}
+    <div class="row">
+        {% for item in attr.items %}
+        <div class="col-md-6">
+            {% if item.label %}
+            <label>{{ item.label }}</label>
+            {% endif %}
+            <input type="text" name="{{ item.name }}" value="{{ item.value }}" placeholder="{{ item.placeholder }}" autocomplete="off" class="form-control">
+            <div class="kform-custom-message {{ item.name }}"></div>
+        </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro textBetween(el,attr,form) %}
+    <div class="input-group" style="width:100%;">
+        <input type="text" name="{{ el.name }}_from" value="{{ attr.value_from }}" placeholder="{{ attr.placeholder_from }}" autocomplete="off" class="form-control">
+        <span class="input-group-btn"></span>
+        <input type="text" name="{{ el.name }}_to" value="{{ attr.value_to }}" placeholder="{{ attr.placeholder_to }}" autocomplete="off" class="form-control">
+    </div>
+{% endmacro %}
+
+{% macro password(el,attr,form) %}
+    {% set elementId = (attr.id ? 'id="'~(form.hasOption('id') ? form.getOption('id')~'_' : '')~attr.id~'"' : '')  %}
+    
+    {% if el.generator %}
+        <div class="input-group password-generator">
+            <input type="text" {{ elementId|raw }} name="{{ el.name }}" value="{{ attr.value }}" placeholder="{{ attr.placeholder }}" autocomplete="off" class="form-control password-generator-input">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-warning generate-random-password" data-password-length="6" data-toggle="tooltip" title="{{ forms.elements.generate_password }}"><i class="fa fa-random fa-fw"></i></button>
+            </span>
+        </div>
+    {% else %}
+        <input type="password" {{ elementId|raw }} name="{{ el.name }}" value="{{ attr.value }}" placeholder="{{ attr.placeholder }}" autocomplete="off" class="form-control">
+    {% endif %}
+{% endmacro %}
+
+{% macro select(el,attr,form) %}
+    <select data-name="{{ el.name }}" data-selected="{{ attr.selected }}" class="form-control sel2" placeholder="{{ attr.placeholder }}" {{ attr.tags ? 'data-with-tags="y"': '' }} data-allow-clear="y" {{ attr.multiple ? 'multiple="true"' : '' }}>
+        {% for opt in el.options %}
+            <option value="{{ opt.value }}"{{ attr.selected == opt.value ? ' selected="selected"' : '' }}>{{ opt.label }}</option>
+        {% endfor %}
+    </select>
+{% endmacro %}
+
+{% macro selectGroup(el,attr,form) %}
+    <div class="row">
+        {% for item in attr.items %}
+        <div class="col-md-6">
+            {% if item.label %}
+            <label>{{ item.label }}</label>
+            {% endif %}
+            <select data-name="{{ item.name }}" data-selected="{{ item.selected }}" class="form-control sel2" placeholder="{{ item.placeholder }}" data-allow-clear="y" {{ item.multiple ? 'multiple="true"' : '' }}>
+                {% for opt in item.options %}
+                    <option value="{{ opt.value }}"{{ item.selected == opt.value ? ' selected="selected"' : '' }}>{{ opt.label }}</option>
+                {% endfor %}
+            </select>
+            <div class="kform-custom-message {{ item.name }}"></div>
+        </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro selectSort(el,attr,form) %}
+    <div class="input-group" style="width:100%;">
+        <select data-name="{{ el.name }}_field" data-selected="{{ attr.selected_field }}" class="form-control sel2" placeholder="{{ attr.placeholder_field }}" data-allow-clear="y" {{ attr.multiple ? 'multiple="true"' : '' }}>
+            {% for opt in el.options %}
+                <option value="{{ opt.value }}"{{ attr.selected_field == opt.value ? ' selected="selected"' : '' }}>{{ opt.label }}</option>
+            {% endfor %}
+        </select>
+        <span class="input-group-btn"></span>
+        <select data-name="{{ el.name }}_order" data-selected="{{ attr.selected_order }}" class="form-control sel2" placeholder="{{ attr.placeholder_order }}">
+            <option value="asc"{{ attr.selected_order == 'asc' ? ' selected="selected"' : '' }}>{{ trans('forms.elements.order_asc') }}</option>
+            <option value="desc"{{ attr.selected_order == 'desc' ? ' selected="selected"' : '' }}>{{ trans('forms.elements.order_desc') }}</option>
+        </select>
+    </div>
+{% endmacro %}
+
+{% macro textarea(el,attr,form) %}
+    <textarea name="{{ el.name }}" class="form-control" rows="{{ attr.rows ? attr.rows : 5 }}" placeholder="{{ attr.placeholder }}">{{ attr.value }}</textarea>
+{% endmacro %}
+
+{% macro checkbox(el,attr,form) %}
+    <input type="checkbox" name="{{ el.name }}" value="{{ attr.value }}" {{ attr.checked ? 'checked="checked"' : '' }}> {{ el.title }}
+{% endmacro %}
+
+{% macro checkboxes(el,attr,form) %}
+    <div class="form-multiple-checkboxes">
+    {% for opt in el.options %}
+        <div class="checkbox{{ el.inline == true ? '-inline' : '' }}">
+            <label><input type="checkbox" name="{{ el.name }}[]" value="{{ opt.value }}" {{ opt.readonly ? ' disabled' : '' }} {{ opt.value in attr.selected ? 'checked="checked"' : '' }}> {{ opt.title }}</label>
+        </div>
+    {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro radio(el,attr,form) %}
+    <input type="radio" name="{{ el.name }}" value="{{ attr.value }}" {{ attr.checked ? 'checked="checked"' : '' }}> {{ el.title }}
+{% endmacro %}
+
+{% macro radios(el,attr,form) %}
+    <div class="form-multiple-checkboxes">
+    {% for opt in el.options %}
+        <div class="radio{{ el.inline == true ? '-inline' : '' }}">
+            <label><input type="radio" name="{{ el.name }}" value="{{ opt.value }}" {{ opt.readonly ? ' disabled' : '' }} {{ opt.value in attr.selected ? 'checked="checked"' : '' }}> {{ opt.title }}</label>
+        </div>
+    {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro imageUpload(el,attr,form) %}
+    <div class="single-fileupload-preview-image-preview">
+        {% if el.image.url %}
+            {% if el.image.destroyUrl %}
+            <a href="#" class="single-fileupload-remove element-remove-image" data-message="{{ trans('forms.elements.image.confirm_delete') }}" data-destroy-url="{{ el.image.destroyUrl }}" data-callback-success="clearUploadedImage"><i class="fa fa-times-circle"></i></a>
+            {% endif %}
+            <span class="single-fileupload-preview">
+                <img src="{{ el.image.url }}">
+            </span>
+        {% else %}
+            <a href="#" class="single-fileupload-remove single-fileupload-remove-preview element-remove-image hide"><i class="fa fa-times-circle"></i></a>
+            <small class="single-fileupload-preview-text text-muted">{{ trans('forms.elements.image.text_preview') }}</small>
+            <span class="single-fileupload-preview"></span>
+        {% endif %}
+    </div>
+    <br>
+
+    <span class="btn btn-default btn-file">
+        <i class="fa fa-image fa-fw"></i> {{ attr.placeholder ? attr.placeholder : trans('forms.elements.image.choose') }} <input type="file" name="{{el.name}}" class="single-fileupload">
+    </span>
+    <span class="single-fileupload-uploaded-filename"></span>
+{% endmacro %}
+
+{% macro fileUpload(el,attr,form) %}
+    <span class="btn btn-default btn-file">
+        <i class="fa fa-upload fa-fw"></i> {{ attr.placeholder ? attr.placeholder : trans('forms.elements.file.choose') }} <input type="file" name="{{el.name}}" class="single-fileupload">
+    </span>
+    <span class="single-fileupload-uploaded-filename"></span>
+{% endmacro %}
+
+{% macro images(el,attr,form) %}
+{% endmacro %}
+
+{% macro datepicker(el,attr,form) %}
+    <div class="input-group date">
+        <input type="text" class="form-control pickdate" name="{{el.name}}" placeholder="{{ attr.placeholder }}" value="{{ attr.value }}">
+        <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro datepickerBetween(el,attr,form) %}
+    <div class="input-group input-daterange">
+        <input type="text" class="form-control pickdate" name="{{el.name}}_from" placeholder="{{ attr.placeholder_from }}" value="{{ attr.value_from }}" style="text-align: left;">
+        <span class="input-group-btn"></span>
+        <input type="text" class="form-control pickdate" name="{{el.name}}_to" placeholder="{{ attr.placeholder_to }}" value="{{ attr.value_to }}" style="text-align: left;">
+    </div>
+{% endmacro %}

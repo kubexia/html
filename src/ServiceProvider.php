@@ -22,8 +22,8 @@ class ServiceProvider extends LaravelServiceProvider {
     public function boot() {
         $this->handleConfigs();
         // $this->handleMigrations();
-        // $this->handleViews();
-        // $this->handleTranslations();
+        $this->handleViews();
+        $this->handleTranslations();
         // $this->handleRoutes();
     }
     /**
@@ -51,13 +51,13 @@ class ServiceProvider extends LaravelServiceProvider {
     }
     
     private function handleTranslations() {
-        $this->loadTranslationsFrom(__DIR__.'/../lang', 'packagename');
+        $this->loadTranslationsFrom(__DIR__.'/../lang', $this->packageName);
     }
     
     private function handleViews() {
-        $this->loadViewsFrom(__DIR__.'/../views', 'packagename');
+        $this->loadViewsFrom(__DIR__.'/../views', $this->packageName);
         
-        $this->publishes([__DIR__.'/../views' => base_path('resources/views/vendor/packagename')]);
+        $this->publishes([__DIR__.'/../views' => base_path('resources/views/vendor/'.$this->packageName)]);
         
     }
     private function handleMigrations() {
