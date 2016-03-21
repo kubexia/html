@@ -1,0 +1,14 @@
+{
+    "name":"kubexia/laravel-html",
+    "description":"Laravel HTML Generator",
+    "type":"library",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.5.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kubexia\\HTML\\": "src/"
+        }
+    }
+}
