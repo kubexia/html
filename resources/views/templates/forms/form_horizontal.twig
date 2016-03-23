@@ -35,16 +35,16 @@
     {% endfor %}
     <div class="form-group">
         <div class="col-sm-offset-{{ grid.0 ? grid.0 : 2 }} col-sm-{{ grid.1 ? grid.1 : 10 }}">
-            <button type="submit" class="btn btn-primary submit-btn" data-loading-text="{{ form.getMethod() == 'POST' ? trans('forms.status.creating') : trans('forms.status.updating') }}">
-                <i class="fa fa-save"></i> {{ trans('forms.buttons.save') }}
+            <button type="submit" class="btn btn-primary submit-btn" data-loading-text="{{ form.getMethod() == 'POST' ? trans('kubexia::forms.status.creating') : trans('kubexia::forms.status.updating') }}">
+                <i class="fa fa-save"></i> {{ trans('kubexia::forms.buttons.save') }}
             </button>
             {% if form.hasRoute('destroy') %}
                 {% set item = (form.hasRoute('destroy','item') ? form.getRoute('destroy','item') : []) %}
                 <button type="button" class="btn btn-danger element-remove" 
-                    data-message="{{ form.hasRoute('destroy','message') ? form.getRoute('destroy','message',[item]) : trans('forms.buttons.delete.confirm') }}"  
+                    data-message="{{ form.hasRoute('destroy','message') ? form.getRoute('destroy','message',[item]) : trans('kubexia::forms.buttons.delete.confirm') }}"  
                     data-destroy-url="{{ form.hasRoute('destroy','url') ? form.getRoute('destroy','url',[item]) : '' }}" 
                     data-return-url="{{ form.hasRoute('destroy','returnTo') ? form.getRoute('destroy','returnTo',[item]) : '' }}">
-                        <i class="fa fa-times"></i> {{ trans('forms.buttons.delete.title') }}
+                        <i class="fa fa-times"></i> {{ trans('kubexia::forms.buttons.delete.title') }}
                 </button>
             {% endif %}
         </div>

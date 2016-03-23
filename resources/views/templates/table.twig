@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 {% if table.hasOption('showRowNumber') %}
-                <th>{{ trans('tables.columns.no') }}</th>
+                <th>{{ trans('kubexia::tables.columns.no') }}</th>
                 {% endif %}
                 {% for col in columns %}
                     <th>{{ col.name }}</th>
@@ -27,7 +27,7 @@
                             {% if value %}
                                 <a href="{{ attribute(table, 'getCallback',[col.attr.route, item]) }}">{{ value|raw }}</a>
                             {% else %}
-                                <i class="text-muted"><small>{{ trans('tables.fields.not_defined') }}</small></i>
+                                <i class="text-muted"><small>{{ trans('kubexia::tables.fields.not_defined') }}</small></i>
                             {% endif %}
                         {% elseif col.attr.image %}
                             {{ t.imagePreview(table,col,item) }}
@@ -35,7 +35,7 @@
                             {% if value %}
                                 {{ value|raw }}
                             {% else %}
-                                <i class="text-muted"><small>{{ trans('tables.fields.not_defined') }}</small></i>
+                                <i class="text-muted"><small>{{ trans('kubexia::tables.fields.not_defined') }}</small></i>
                             {% endif %}
                         {% endif %}
                     </td>
@@ -46,7 +46,7 @@
             </tr>
             {% else %}
                 <tr>
-                    <td colspan="100%">{{ trans('tables.results.no_items') }}</td>
+                    <td colspan="100%">{{ trans('kubexia::tables.results.no_items') }}</td>
                 </tr>
             {% endfor %}
         </tbody>

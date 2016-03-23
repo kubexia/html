@@ -9,6 +9,7 @@
     "blueimp-file-upload": "jquery-file-upload#^9.12.1",
     "select2": "^4.0.2",
     "bootstrap-datepicker": "^1.6.0",
+    "metisMenu": "^2.4.3",
     "kubexia-formjs": "*"
   }
 }
