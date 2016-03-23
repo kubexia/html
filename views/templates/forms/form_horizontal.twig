@@ -1,4 +1,4 @@
-{% import 'components/macros/form_elements.twig' as c %}
+{% import 'kubexia::macros/form_elements.twig' as c %}
 {% set grid = form.getOption('formGrid') %}
 {% set formId = (form.hasOption('id') ? 'id="'~form.getOption('id')~'"' : '') %}
 <form {{ formId|raw }} action="{{ form.getAction() }}" method="POST" class="form-horizontal form-horizontal-align-left kform" enctype="multipart/form-data">

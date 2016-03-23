@@ -1,7 +1,7 @@
 <?php
-namespace Kubexia\HTML\Libraries;
+namespace Kubexia\HTML;
 
-use Kubexia\HTML\Libraries\Page;
+use Kubexia\HTML\Page;
 
 class Table extends Page{
     
@@ -77,7 +77,7 @@ class Table extends Page{
     }
     
     public function make(){
-        return view('components.templates.table',['table' => $this]);
+        return view('kubexia::templates.table',['table' => $this]);
     }
     
 }

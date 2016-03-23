@@ -1,6 +1,6 @@
 {
-    "name":"kubexia/laravel-html",
-    "description":"Laravel HTML Generator",
+    "name":"kubexia/kubexia",
+    "description":"Laravel Components",
     "type":"library",
     "license": "MIT",
     "require": {
@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kubexia\\HTML\\": "src/"
+            "Kubexia\\": "src/"
         }
     },
     "minimum-stability": "stable"

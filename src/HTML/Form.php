@@ -1,7 +1,7 @@
 <?php
-namespace Kubexia\HTML\Libraries;
+namespace Kubexia\HTML;
 
-use Kubexia\HTML\Libraries\Page;
+use Kubexia\HTML\Page;
 
 class Form extends Page{
     
@@ -70,7 +70,7 @@ class Form extends Page{
     public function make($template=NULL){
         $template = (is_null($template) ? $this->getOption('formTemplate') : $template);
         
-        return view('components.templates.forms.form_'.$template,['form' => $this]);
+        return view('kubexia::templates.forms.form_'.$template,['form' => $this]);
     }
     
 }

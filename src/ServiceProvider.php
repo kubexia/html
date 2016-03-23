@@ -1,5 +1,5 @@
 <?php
-namespace Kubexia\HTML;
+namespace Kubexia;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
@@ -16,7 +16,7 @@ class ServiceProvider extends LaravelServiceProvider {
      * @return void
      */
     
-    protected $packageName = 'kubexiahtml';
+    protected $packageName = 'kubexia';
 
 
     public function boot() {
