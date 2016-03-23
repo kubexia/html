@@ -77,7 +77,7 @@ class ServiceProvider extends LaravelServiceProvider {
     }
     
     private function handleRoutes() {
-        include __DIR__.'/../src/Http/routes.php';
+        //include __DIR__.'/../src/Http/routes.php';
     }
     
     private function handleAssets(){
@@ -96,15 +96,7 @@ class ServiceProvider extends LaravelServiceProvider {
         ]);
         
         $this->publishes([
-            __DIR__.'/../src/Http/Base' => app_path('Http/Base'),
-        ]);
-        
-        $this->publishes([
-            __DIR__.'/../src/Http/Controllers' => app_path('Http/Controllers'),
-        ]);
-        
-        $this->publishes([
-            __DIR__.'/../src/Http/Middleware' => app_path('Http/Middleware'),
+            __DIR__.'/../src/Http' => app_path('Http'),
         ]);
     }
 }
