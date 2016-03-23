@@ -1,0 +1,14 @@
+{
+  "name": "Kubexia Dependencies",
+  "private": true,
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "font-awesome": "^4.5.0",
+    "bootstrap": "^3.3.6",
+    "jquery-ui": "^1.11.4",
+    "blueimp-file-upload": "jquery-file-upload#^9.12.1",
+    "select2": "^4.0.2",
+    "bootstrap-datepicker": "^1.6.0",
+    "kubexia/formjs": "^1.*"
+  }
+}

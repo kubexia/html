@@ -1,7 +1,7 @@
 {% import 'kubexia::macros/form_elements.twig' as c %}
 {% set grid = form.getOption('formGrid') %}
 {% set formId = (form.hasOption('id') ? 'id="'~form.getOption('id')~'"' : '') %}
-<form {{ formId|raw }} action="{{ form.getAction() }}" method="POST" class="form-horizontal form-horizontal-align-left kform" enctype="multipart/form-data">
+<form {{ formId|raw }} action="{{ form.getAction() }}" method="POST" class="form-horizontal form-horizontal-align-left formjs" enctype="multipart/form-data">
     <input type="hidden" name="_method" value="{{ form.getMethod() }}">
     <div class="notification-holder"></div>
     {% for el in form.getElements() %}
@@ -17,7 +17,7 @@
                             {{ el.element.label }}{% if el.element.required %}<span class="text-danger">*</span>{% endif %}
                         </label>
                         {{ attribute(c, el.element.type, {'el': el.element,'attr': el.attributes, 'form': form}) }}
-                        <div class="kform-custom-message {{ el.element.name }}"></div>
+                        <div class="formjs-custom-message {{ el.element.name }}"></div>
                     </div>
                 </div>
             {% else %}
@@ -27,7 +27,7 @@
                 </label>
                 <div class="col-md-{{ grid.1 ? grid.1 : 10 }}">
                     {{ attribute(c, el.element.type, {'el': el.element,'attr': el.attributes, 'form': form}) }}
-                    <div class="kform-custom-message {{ el.element.name }}"></div>
+                    <div class="formjs-custom-message {{ el.element.name }}"></div>
                 </div>
             </div>
             {% endif %}

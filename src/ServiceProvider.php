@@ -51,19 +51,19 @@ class ServiceProvider extends LaravelServiceProvider {
     }
     
     private function handleTranslations() {
-        $this->loadTranslationsFrom(__DIR__.'/../lang', $this->packageName);
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', $this->packageName);
     }
     
     private function handleViews() {
-        $this->loadViewsFrom(__DIR__.'/../views', $this->packageName);
+        $this->loadViewsFrom(__DIR__.'/../resources/views', $this->packageName);
         
-        $this->publishes([__DIR__.'/../views' => base_path('resources/views/vendor/'.$this->packageName)]);
+        $this->publishes([__DIR__.'/../resources/views' => base_path('resources/views/vendor/'.$this->packageName)]);
         
     }
     private function handleMigrations() {
         $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')]);
     }
     private function handleRoutes() {
-        include __DIR__.'/../routes.php';
+        include __DIR__.'/../src/Http/routes.php';
     }
 }

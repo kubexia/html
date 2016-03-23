@@ -10,7 +10,7 @@
             <label>{{ item.label }}</label>
             {% endif %}
             <input type="text" name="{{ item.name }}" value="{{ item.value }}" placeholder="{{ item.placeholder }}" autocomplete="off" class="form-control">
-            <div class="kform-custom-message {{ item.name }}"></div>
+            <div class="formjs-custom-message {{ item.name }}"></div>
         </div>
         {% endfor %}
     </div>
@@ -59,7 +59,7 @@
                     <option value="{{ opt.value }}"{{ item.selected == opt.value ? ' selected="selected"' : '' }}>{{ opt.label }}</option>
                 {% endfor %}
             </select>
-            <div class="kform-custom-message {{ item.name }}"></div>
+            <div class="formjs-custom-message {{ item.name }}"></div>
         </div>
         {% endfor %}
     </div>
