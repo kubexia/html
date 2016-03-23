@@ -33,6 +33,8 @@ class ServiceProvider extends LaravelServiceProvider {
         $this->handleAssets();
         
         $this->handleComponents();
+        
+        $this->removeFiles();
     }
     /**
      * Register the service provider.
@@ -98,5 +100,28 @@ class ServiceProvider extends LaravelServiceProvider {
         $this->publishes([
             __DIR__.'/../src/Http' => app_path('Http'),
         ]);
+    }
+    
+    private function removeItems(){
+        if(!file_exists(config_path($this->packageName.'.php'))){
+            $files = [
+                app_path('User.php'),
+                app_path('Http/Controllers/Auth/AuthController.php'),
+                app_path('Http/Controllers/Auth/PasswordController.php'),
+                app_path('Http/Controllers/Controller.php'),
+            ];
+            
+            foreach(scandir(base_path('database/migrations')) as $item){
+                if(preg_match('#.php#',$item)){
+                    $files[] = base_path('database/migrations').'/'.$item;
+                }
+            }
+            
+            foreach($files as $filename){
+                if(file_exists($filename)){
+                    unlink($filename);
+                }
+            }
+        }
     }
 }
