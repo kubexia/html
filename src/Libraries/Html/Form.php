@@ -1,7 +1,7 @@
 <?php
-namespace Kubexia\Html;
+namespace Kubexia\Libraries\Html;
 
-use Kubexia\Html\Page;
+use Kubexia\Libraries\Html\Page;
 
 class Form extends Page{
     
