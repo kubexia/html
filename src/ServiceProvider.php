@@ -20,10 +20,6 @@ class ServiceProvider extends LaravelServiceProvider {
 
 
     public function boot() {
-        new \Twig_SimpleFunction('theme', function($string='',$parameters = [], $secure = null){
-            return url('themes/'.config('section').'/'.config('theme').'/'.$string,$parameters, $secure);
-        });
-        
         $this->handleConfigs();
         
         // $this->handleMigrations();
@@ -35,6 +31,8 @@ class ServiceProvider extends LaravelServiceProvider {
         // $this->handleRoutes();
         
         $this->handleAssets();
+        
+        $this->handleComponents();
     }
     /**
      * Register the service provider.
@@ -86,5 +84,27 @@ class ServiceProvider extends LaravelServiceProvider {
         $this->publishes([
             __DIR__.'/../public' => public_path(),
         ], 'kubexia');
+    }
+    
+    private function handleComponents(){
+        $this->publishes([
+            __DIR__.'/../src/Libraries' => app_path('Libraries'),
+        ]);
+        
+        $this->publishes([
+            __DIR__.'/../src/Models' => app_path('Models'),
+        ]);
+        
+        $this->publishes([
+            __DIR__.'/../src/Http/Base' => app_path('Http/Base'),
+        ]);
+        
+        $this->publishes([
+            __DIR__.'/../src/Http/Controllers' => app_path('Http/Controllers'),
+        ]);
+        
+        $this->publishes([
+            __DIR__.'/../src/Http/Middleware' => app_path('Http/Middleware'),
+        ]);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Kubexia\Http\Response;
+namespace App\Libraries\Http\Response;
 
 class Response{
     
