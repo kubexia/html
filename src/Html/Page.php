@@ -1,5 +1,5 @@
 <?php
-namespace Kubexia\HTML;
+namespace Kubexia\Html;
 
 class Page{
     

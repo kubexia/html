@@ -1,7 +1,7 @@
 <?php
-namespace Kubexia\HTML;
+namespace Kubexia\Html;
 
-use Kubexia\HTML\Page;
+use Kubexia\Html\Page;
 
 class Table extends Page{
     
