@@ -8,6 +8,7 @@
         <title>{{ (meta.title ? meta.title ~ ' &mdash; '~trans('texts.app_name') : trans('texts.app_name'))|raw }}</title>
         <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('bower_components/metisMenu/dist/metisMenu.min.css') }}">
         {% block styles %}{% endblock %}
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet" type="text/css">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
@@ -67,6 +68,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/kubexia-formjs/form.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('common/assets/js/functions.js') }}"></script>
     {% block javascripts %}{% endblock %}
     <script type="text/javascript" src="{{ theme('assets/js/app.js') }}"></script>
