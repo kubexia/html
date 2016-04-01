@@ -36,7 +36,7 @@ class ServiceProvider extends LaravelServiceProvider {
         
         $this->registerTwigFunctions();
         
-        $this->removeFiles();
+        //$this->removeFiles();
     }
     /**
      * Register the service provider.
@@ -132,7 +132,7 @@ class ServiceProvider extends LaravelServiceProvider {
         if(!file_exists(config_path($this->packageName.'.php'))){
             $files = [
                 app_path('User.php'),
-                app_path('Http/Controllers/Auth'),
+                app_path('Http/Controller.php'),
             ];
             
             foreach(scandir(base_path('database/migrations')) as $item){
@@ -142,13 +142,8 @@ class ServiceProvider extends LaravelServiceProvider {
             }
             
             foreach($files as $filename){
-                if(is_dir($filename)){
-                    rmdir($filename);
-                }
-                else{
-                    if(file_exists($filename)){
-                        unlink($filename);
-                    }
+                if(file_exists($filename)){
+                    unlink($filename);
                 }
             }
         }
