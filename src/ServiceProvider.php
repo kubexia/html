@@ -28,7 +28,7 @@ class ServiceProvider extends LaravelServiceProvider {
         
         $this->handleTranslations();
         
-        $this->handleRoutes();
+        //$this->handleRoutes();
         
         $this->handleThemes();
         
@@ -123,7 +123,7 @@ class ServiceProvider extends LaravelServiceProvider {
         
         foreach($http as $name => $path){
             $this->publishes([
-                __DIR__.'/../src/Http' => app_path('Http/'.$path),
+                __DIR__.'/../src/Http/'.$path => app_path('Http/'.$path),
             ],$name);
         }
     }
