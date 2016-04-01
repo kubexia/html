@@ -34,6 +34,8 @@ class ServiceProvider extends LaravelServiceProvider {
         
         $this->handleComponents();
         
+        $this->registerTwigFunctions();
+        
         $this->removeFiles();
     }
     /**
@@ -61,8 +63,6 @@ class ServiceProvider extends LaravelServiceProvider {
         ],'configs');
         
         $this->mergeConfigFrom($configPath, $this->packageName);
-        
-        $this->removeItems();
     }
     
     private function handleTranslations() {
@@ -149,5 +149,13 @@ class ServiceProvider extends LaravelServiceProvider {
                 }
             }
         }
+    }
+    
+    private function registerTwigFunctions(){
+        $twig = app('twig');
+        
+        $twig->addFunction(new \Twig_SimpleFunction('theme', function($string='',$parameters = [], $secure = null){
+            return url('themes/'.config('section').'/'.config('theme').'/'.$string,$parameters, $secure);
+        }));
     }
 }

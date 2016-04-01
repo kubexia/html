@@ -1,18 +1,13 @@
-1. composer require kubexia/kubexia
-1.1 nano .env -> enter settings
+#Laravel Components
 
-2. Twig Installation:
-    2.1. configs/app.php  -> providers and aliases: TwigBridge\ServiceProvider::class
-    2.2. php artisan vendor:publish --provider="TwigBridge\ServiceProvider"
-    2.3. go to configs/twigbridge.php , find 'functions' then add:
+1. composer require kubexia/kubexia 1
+1.1 nano .env -> enter settings 1.1
+
+2. Twig Installation: 2
+    2.1. configs/app.php  -> providers and aliases: TwigBridge\ServiceProvider::class 2.1
+    2.2. php artisan vendor:publish --provider="TwigBridge\ServiceProvider" 2.2
     
-    <code>
-    'theme' => function($string='',$parameters = [], $secure = null){
-        return url('themes/'.config('section').'/'.config('theme').'/'.$string,$parameters, $secure);
-    }
-    </code>
-
-3. Kubexia Installation
-    2.1. configs/app.php  -> providers: Kubexia\ServiceProvider::class
-    2.2. php artisan vendor:publish --provider="Kubexia\ServiceProvider"
-    2.3. go to /public and run "bower install"
+3. Kubexia Installation 3
+    2.1. configs/app.php  -> providers: Kubexia\ServiceProvider::class 3.1
+    2.2. php artisan vendor:publish --provider="Kubexia\ServiceProvider" 3.2
+    2.3. go to /public and run "bower install" 3.3
