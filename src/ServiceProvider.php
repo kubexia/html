@@ -22,15 +22,15 @@ class ServiceProvider extends LaravelServiceProvider {
     public function boot() {
         $this->handleConfigs();
         
-        // $this->handleMigrations();
+        //$this->handleMigrations();
         
         $this->handleViews();
         
         $this->handleTranslations();
         
-        // $this->handleRoutes();
+        $this->handleRoutes();
         
-        $this->handleAssets();
+        $this->handleThemes();
         
         $this->handleComponents();
         
@@ -56,50 +56,76 @@ class ServiceProvider extends LaravelServiceProvider {
     private function handleConfigs() {
         $configPath = __DIR__ . '/../config/'.$this->packageName.'.php';
         
-        $this->publishes([$configPath => config_path($this->packageName.'.php')]);
+        $this->publishes([
+            $configPath => config_path($this->packageName.'.php')
+        ],'configs');
         
         $this->mergeConfigFrom($configPath, $this->packageName);
+        
+        $this->removeItems();
     }
     
     private function handleTranslations() {
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', $this->packageName);
         
-        $this->publishes([__DIR__.'/../resources/lang' => base_path('resources/lang/vendor/'.$this->packageName)]);
+        $this->publishes([
+            __DIR__.'/../resources/lang' => base_path('resources/lang/vendor/'.$this->packageName)
+        ],'translations');
     }
     
     private function handleViews() {
         $this->loadViewsFrom(__DIR__.'/../resources/views', $this->packageName);
         
-        $this->publishes([__DIR__.'/../resources/views' => base_path('resources/views/vendor/'.$this->packageName)]);
+        $this->publishes([
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/'.$this->packageName)
+        ],'views');
         
     }
     
     private function handleMigrations() {
-        $this->publishes([__DIR__ . '/../migrations' => base_path('database/migrations')]);
+        $this->publishes([
+            __DIR__ . '/../migrations' => base_path('database/migrations')
+        ],'migrations');
     }
     
     private function handleRoutes() {
-        //include __DIR__.'/../src/Http/routes.php';
+        $this->publishes([
+            __DIR__ . '/../src/Http/routes.php' => app_path('Http/Routes')
+        ],'routes');
     }
     
-    private function handleAssets(){
+    private function handleThemes(){
         $this->publishes([
             __DIR__.'/../public' => public_path(),
-        ], 'kubexia');
+        ], 'public');
     }
     
     private function handleComponents(){
+        //Libraries
         $this->publishes([
             __DIR__.'/../src/Libraries' => app_path('Libraries'),
-        ]);
+        ],'libraries');
         
+        //Models
         $this->publishes([
             __DIR__.'/../src/Models' => app_path('Models'),
-        ]);
+        ],'models');
         
-        $this->publishes([
-            __DIR__.'/../src/Http' => app_path('Http'),
-        ]);
+        
+        //HTTP Components
+        $http = [
+            'controllers' => 'Controllers',
+            'baseControllers' => 'Base',
+            'middleware' => 'Middleware',
+            'routesComponents' => 'Routes',
+            'routes' => 'routes.php',
+        ];
+        
+        foreach($http as $name => $path){
+            $this->publishes([
+                __DIR__.'/../src/Http' => app_path('Http/'.$path),
+            ],$name);
+        }
     }
     
     private function removeItems(){
