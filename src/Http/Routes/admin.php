@@ -110,6 +110,4 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
             });
         });
     });
-    
-   include __DIR__.'/modules/shop.php';
 });

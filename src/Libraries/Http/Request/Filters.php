@@ -1,5 +1,5 @@
 <?php
-namespace Kubexia\Http\Request;
+namespace App\Libraries\Http\Request;
 
 use Illuminate\Http\Request;
 

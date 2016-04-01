@@ -4,7 +4,7 @@ Route::group(['middleware' => ['web']], function () {
     require __DIR__.'/Routes/app.php';
     
     /* ADMIN */
-    require __DIR__.'/Routes/admin/admin.php';
+    require __DIR__.'/Routes/admin.php';
 });
 
 Route::group(['prefix' => 'api','namespace' => 'API','middleware' => ['api']], function () {

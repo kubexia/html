@@ -9,5 +9,5 @@
     
 3. Kubexia Installation 3
 1. configs/app.php  -> providers: Kubexia\ServiceProvider::class 3.1
-2. php artisan vendor:publish --provider="Kubexia\ServiceProvider" 3.2
+2. php artisan vendor:publish --provider="Kubexia\ServiceProvider" --force 3.2
 3. go to /public and run "bower install" 3.3

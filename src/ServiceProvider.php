@@ -128,13 +128,11 @@ class ServiceProvider extends LaravelServiceProvider {
         }
     }
     
-    private function removeItems(){
+    private function removeFiles(){
         if(!file_exists(config_path($this->packageName.'.php'))){
             $files = [
                 app_path('User.php'),
-                app_path('Http/Controllers/Auth/AuthController.php'),
-                app_path('Http/Controllers/Auth/PasswordController.php'),
-                app_path('Http/Controllers/Controller.php'),
+                app_path('Http/Controllers/Auth'),
             ];
             
             foreach(scandir(base_path('database/migrations')) as $item){
@@ -144,8 +142,13 @@ class ServiceProvider extends LaravelServiceProvider {
             }
             
             foreach($files as $filename){
-                if(file_exists($filename)){
-                    unlink($filename);
+                if(is_dir($filename)){
+                    rmdir($filename);
+                }
+                else{
+                    if(file_exists($filename)){
+                        unlink($filename);
+                    }
                 }
             }
         }
