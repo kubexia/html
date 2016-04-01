@@ -36,7 +36,7 @@ class ServiceProvider extends LaravelServiceProvider {
         
         $this->registerTwigFunctions();
         
-        //$this->removeFiles();
+        $this->removeFiles();
     }
     /**
      * Register the service provider.

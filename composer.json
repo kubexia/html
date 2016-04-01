@@ -12,14 +12,5 @@
             "Kubexia\\": "src/"
         }
     },
-    "minimum-stability": "stable",
-    "scripts": {
-        "post-install-cmd": [
-            "rm app/User.php",
-            "rm app/Http/Controller.php",
-            "rm -rf app/Http/Controllers/Auth",
-            "rm -rf database/migrations/*"
-        ]
-        
-    }
+    "minimum-stability": "stable"
 }
