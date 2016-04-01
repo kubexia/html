@@ -29,6 +29,6 @@ class Controller extends BaseController
         
         view()->addLocation(public_path($location.'/'.$this->configs['section'].'/'.$this->configs['theme']));
         
-        $this->response = new \App\Libraries\Response\Response();
+        $this->response = new \App\Libraries\Http\Response\Response();
     }
 }
