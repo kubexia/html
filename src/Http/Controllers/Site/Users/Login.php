@@ -16,7 +16,7 @@ class Login extends BaseController {
             return redirect()->route('dashboard');
         }
         
-        return view('contents.site.users.login',[
+        return view('kubexia::contents.site.users.login',[
             'redirectTo' => $request->get('redirect_to')
         ]);
     }
